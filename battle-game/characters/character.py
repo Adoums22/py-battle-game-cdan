@@ -33,25 +33,23 @@ class Character:
 
     # Getter armor
     def get_armor(self):
-        return self.armor.get_defense()
+        return self.armor.defense
 
     def set_armor(self, new_armor):
         self.armor = new_armor
 
-    def attack(self, other:Self) :
-        # Calcul des dégâts
+    def attack(self, other:Self):
         damage_dealt = self.weapon.damage
 
-        # Réduction de la défense de l'armure de l'autre personnage
         other_armor_defense = other.armor.get_defense()
-        if other_armor_defense > 0:
-            if damage_dealt >= other_armor_defense:
-                damage_dealt -= other_armor_defense
-                other.armor.set_defense(0)  # Réduit la défense à zéro si les dégâts sont supérieurs à la défense actuelle
-            else:
-                other.armor.set_defense(other_armor_defense - damage_dealt)
-                damage_dealt = 0
+
+        # Réduire la défense de l'armure de l'autre personnage
+        if damage_dealt >= other_armor_defense:
+            damage_dealt -= other_armor_defense
+            other.armor.set_defense(0)
+        else:
+            other.armor.set_defense(other_armor_defense - damage_dealt)
+            damage_dealt = 0
 
         # Infliger les dégâts restants aux points de vie du personnage
-        other_hp = other.get_hp()
-        other.set_hp(other_hp - damage_dealt)
+        other.set_hp(other.get_hp() - damage_dealt)
