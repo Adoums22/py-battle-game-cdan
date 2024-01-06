@@ -1,16 +1,19 @@
-from characters.character import Character
+
+from characters.barbar import Barbar
+from characters.wizard import Wizard
 from gears.weapon import Weapon
 from gears.armor import Armor
+from gears.spell import Fireball
 
 #Instanciation 
+list_of_spells = [Fireball()]
 knife = Weapon('Couteau')
 gun = Weapon ('Deagle', 50)
 mini_shield = Armor('Mini Shield', 25)
 gros_shield = Armor('Gros Shield', 50)
-adel = Character(100, 'Adel', gun, mini_shield)
-Kevin = Character(100, 'Kevin', knife, gros_shield)
-print(adel.armor.defense)
-print(Kevin.armor.defense)
+adel = Wizard(100, 'Adel', gun, mini_shield, list_of_spells, 10)
+Kevin = Barbar(100, 'Kevin', knife, gros_shield)
+
 # Test Méthode
 adel.attack(Kevin)
 print("Results: ")
