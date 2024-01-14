@@ -1,4 +1,4 @@
-
+from arena.arena import Arena
 from characters.barbar import Barbar
 from characters.wizard import Wizard
 from gears.weapon import Weapon
@@ -13,20 +13,6 @@ mini_shield = Armor('Mini Shield', 25)
 gros_shield = Armor('Gros Shield', 50)
 adel = Wizard(100, 'Adel', gun, mini_shield, list_of_spells, 10)
 Kevin = Barbar(100, 'Kevin', knife, gros_shield)
+arena = Arena(Kevin, adel)
 
-# Test Méthode
-adel.attack(Kevin)
-print("Results: ")
-print(adel.name, adel.hp, "HP")  # Affiche les points de vie d'Adel
-print(adel.name, adel.armor.get_defense(), "Armor")  # Affiche la défense d'armure d'Adel
-print(Kevin.name, Kevin.hp, "HP")  # Affiche les points de vie de Kevin
-print(Kevin.name, Kevin.armor.get_defense(), "Armor")  # Affiche la défense d'armure de Kevin
-
-input("------------------")
-Kevin.attack(adel)
-print("Results: ")
-print(adel.name, adel.hp, "HP")
-print(adel.name, adel.armor.defense, "HP")
-print(Kevin.name, Kevin.hp, "HP")
-print(Kevin.name, Kevin.armor.defense, "HP")
-input("------------------")
+arena.fight()

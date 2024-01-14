@@ -38,6 +38,9 @@ class Character:
     def set_armor(self, new_armor):
         self.armor = new_armor
 
+    def is_alive(self):
+        return self.hp > 0
+
     def attack(self, other:Self):
         damage_dealt = self.weapon.damage
 
