@@ -15,4 +15,5 @@ adel = Wizard(100, 'Adel', gun, mini_shield, list_of_spells, 10)
 Kevin = Barbar(100, 'Kevin', knife, gros_shield)
 arena = Arena(Kevin, adel)
 
+print(adel.get_armor())
 arena.fight()

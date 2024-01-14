@@ -5,7 +5,7 @@ from gears.weapon import Weapon
 from typing import Self
 from typing import List
 class Wizard(Character):
-    def __init__(self, hp: int, name: str, weapon: Weapon, armor: Armor, spells: List[Spell], mana):
+    def __init__(self, hp: int, name: str, weapon: Weapon, armor: Armor, spells: List[Spell], mana:int = 10):
         super().__init__(hp, name, weapon, armor)
         self.spells = spells
         self.mana = mana
@@ -16,23 +16,29 @@ class Wizard(Character):
             print(f"{i}. {spell.name} (Damage: {spell.damage}, Mana: {spell.mana})")
 
     def cast_spell(self, other: 'Character'):
-        self.list_spells()
-        choice = input("Choose a spell by entering its number: ")
+        while True:
+            self.list_spells()
+            print(f"{self.name}'s current mana: {self.mana}")
+            choice = input("Choose a spell by entering its number (or type 'back' to go back): ")
 
-        try:
-            spell_index = int(choice) - 1
-            if 0 <= spell_index < len(self.spells):
-                selected_spell = self.spells[spell_index]
-                if self.mana >= selected_spell.mana:
-                    print(f"{self.name} casts {selected_spell.name} at {other.name}")
-                    self.mana -= selected_spell.mana
-                    other.set_hp(other.get_hp() - selected_spell.damage)
+            if choice.lower() == 'back':
+                return  # Retournez à la boucle principale pour choisir entre arme et sort
+            try:
+                spell_index = int(choice) - 1
+                if 0 <= spell_index < len(self.spells):
+                    selected_spell = self.spells[spell_index]
+                    if self.mana >= selected_spell.mana:
+                        print(f"{self.name} casts {selected_spell.name} at {other.name}")
+                        self.mana -= selected_spell.mana
+                        other.set_hp(other.get_hp() - selected_spell.damage)
+                        print(f"{self.name}'s remaining mana: {self.mana}")
+                        return  # Sortez de la boucle si le sort est lancé avec succès
+                    else:
+                        print("Not enough mana to cast the spell! Choose another spell.")
                 else:
-                    print("Not enough mana to cast the spell!")
-            else:
-                print("Invalid spell choice.")
-        except ValueError:
-            print("Invalid input. Please enter a valid number.")
+                    print("Invalid spell choice.")
+            except ValueError:
+                print("Invalid input. Please enter a valid number.")
 
     def attack(self, other:Self):
         valid_choice = False
