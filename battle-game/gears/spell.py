@@ -26,3 +26,9 @@ class Spell:
 class Fireball(Spell):
     def __init__(self):
         super().__init__(name="Fireball", damage=20, mana=5)
+class ShadowBlast(Spell):
+    def __init__(self):
+        super().__init__(name="Shadow Blast", damage=18, mana=4)
+class DevastationOfSpirits(Spell):
+    def __init__(self):
+        super().__init__(name="Devastation of Spirits", damage=50, mana=10)
