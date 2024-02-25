@@ -4,18 +4,18 @@ from typing import Self
 
 class Character:
 
-    def __init__(self, hp:int, name:str , weapon:Weapon, armor:Armor) :
+    def __init__(self, hp: int, name: str, weapon: Weapon, armor: Armor):
         self.hp = hp
         self.name = name
         self.weapon = weapon
         self.armor = armor
 
-    # Getter pour hp
     def get_hp(self):
         return self.hp
 
-    def set_hp(self, new_hp):
-        self.hp = new_hp
+    def set_hp(self, newhp: int):
+        # Assurez-vous que les points de vie (HP) ne descendent jamais en dessous de zéro
+        self.hp = max(0, newhp)
 
     # Getter name
     def get_name(self):
@@ -38,12 +38,10 @@ class Character:
     def set_armor(self, new_armor):
         self.armor = new_armor
 
-    def is_alive(self):
+    def is_alive(self) -> bool:
         return self.hp > 0
 
-    def attack(self, other:Self):
-        damage_dealt = self.weapon.damage
-
+    def attack(self, other:Self, damage_dealt):
         other_armor_defense = other.armor.get_defense()
 
         # Réduire la défense de l'armure de l'autre personnage

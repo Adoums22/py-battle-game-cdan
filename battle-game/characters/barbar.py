@@ -6,9 +6,10 @@ class Barbar(Character):
     def __init__(self, hp: int, name: str, weapon: Weapon, armor: Armor):
         super().__init__(hp, name, weapon, armor)
 
-    def attack(self, other:Self):
-        # Attaque une première fois en utilisant la méthode de la classe parent
-        super().attack(other)
+    def attack(self, other: Character):
+        damage_dealt = self.weapon.damage
 
-        # Attaque une deuxième fois
-        super().attack(other)
+        # Attaque une fois en utilisant la méthode de la classe parente
+        super().attack(other, damage_dealt)
+         # Attaque une deuxieme fois en utilisant la méthode de la classe parente
+        super().attack(other, damage_dealt)

@@ -33,20 +33,22 @@ class Arena:
             print(f"\n\033[1mRound {self.round_number}:\033[0m")  # Titre en gras
 
             # Premier personnage attaque le deuxième
-            self.first_character.attack(self.second_character)
             print(f"\033[94m{self.first_character.name}\033[0m attacks \033[95m{self.second_character.name}\033[0m.")  # Bleu pour le premier personnage, magenta pour le deuxième
-            self.print_mini_bilan()
+            self.first_character.attack(self.second_character)
 
-            # Deuxième personnage attaque le premier
-            if self.second_character.is_alive():  # Vérifie si le deuxième personnage est encore en vie
+            # Vérifie si le deuxième personnage est encore en vie après l'attaque du premier
+            if self.second_character.is_alive():
                 print(f"\033[95m{self.second_character.name}\033[0m attacks \033[94m{self.first_character.name}\033[0m.")  # Magenta pour le deuxième personnage, bleu pour le premier
                 self.second_character.attack(self.first_character)
                 self.print_mini_bilan()
 
             self.round_number += 1
 
+            input("Press Enter to continue...")
+
         # Affichage du bilan final
         self.print_final_bilan()
+
 
     def print_mini_bilan(self):
         print(f"\033[1m\033[94m--- Round Summary {self.round_number} ---\033[0m")  # Titre en gras et en bleu
@@ -57,7 +59,13 @@ class Arena:
     def print_final_bilan(self):
         if self.first_character.is_alive():
             print(f"\n\033[94m{self.first_character.name}\033[0m wins!")  # Bleu pour le premier personnage
+            print(f"\033[94m{self.first_character.name}\033[0m HP: \033[94m{self.first_character.get_hp()}\033[0m | SHIELD: \033[94m{self.first_character.get_armor()}\033[0m ")
+            print(f"\033[95m{self.second_character.name}\033[0m HP: \033[95m{self.second_character.get_hp()}\033[0m | SHIELD: \033[95m{self.second_character.get_armor()}\033[0m")
         elif self.second_character.is_alive():
             print(f"\n\033[91m{self.second_character.name}\033[0m wins!")  # Rouge pour le deuxième personnage
+            print(f"\033[94m{self.first_character.name}\033[0m HP: \033[94m{self.first_character.get_hp()}\033[0m | SHIELD: \033[94m{self.first_character.get_armor()}\033[0m ")
+            print(f"\033[95m{self.second_character.name}\033[0m HP: \033[95m{self.second_character.get_hp()}\033[0m | SHIELD: \033[95m{self.second_character.get_armor()}\033[0m")
         else:
             print("\nIt's a draw!")  # Cas d'égalité
+            print(f"\033[94m{self.first_character.name}\033[0m HP: \033[94m{self.first_character.get_hp()}\033[0m | SHIELD: \033[94m{self.first_character.get_armor()}\033[0m ")
+            print(f"\033[95m{self.second_character.name}\033[0m HP: \033[95m{self.second_character.get_hp()}\033[0m | SHIELD: \033[95m{self.second_character.get_armor()}\033[0m")

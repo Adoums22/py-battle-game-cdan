@@ -54,7 +54,8 @@ class Wizard(Character):
             choice = input("Do you want to attack with your weapon or cast a spell? (weapon/spell): ").lower()
 
             if choice == "weapon":
-                super().attack(other)  # Attaque avec l'arme en utilisant la méthode de la classe parente
+                damage_dealt = self.weapon.damage
+                super().attack(other, damage_dealt)  # Attaque avec l'arme en utilisant la méthode de la classe parente
                 valid_choice = True
             elif choice == "spell":
                 self.cast_spell(other)
