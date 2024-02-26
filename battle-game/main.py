@@ -7,7 +7,6 @@ from gears.weapon import Weapon
 from gears.armor import Armor
 from gears.spell import Fireball
 from colorama import Fore, Style
-import config.weapon_config  
 
 #Instanciation 
 list_of_spells = [Fireball()]

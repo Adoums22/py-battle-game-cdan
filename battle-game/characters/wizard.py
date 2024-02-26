@@ -1,3 +1,4 @@
+from colorama import Fore, Style
 from characters.character import Character  
 from gears.spell import Spell
 from gears.armor import Armor
@@ -13,15 +14,15 @@ class Wizard(Character):
         self.first_turn = True
 
     def list_spells(self):
-        print("\033[1mAvailable spells:\033[0m")  # Titre en gras
+        print(f"{Style.BRIGHT}Available spells:{Style.RESET_ALL}")  # Titre en gras
         for i, spell in enumerate(self.spells, 1):
-            print(f"{i}. \033[96m{spell.name}\033[0m (Damage: \033[93m{spell.damage}\033[0m, Mana: \033[93m{spell.mana}\033[0m)")  # Cyan pour le nom du sort, jaune pour les dégâts et la mana
+            print(f"{i}. {Fore.CYAN}{spell.name}{Style.RESET_ALL} (Damage: {Fore.YELLOW}{spell.damage}{Style.RESET_ALL}, Mana: {Fore.YELLOW}{spell.mana}{Style.RESET_ALL}")  # Cyan pour le nom du sort, jaune pour les dégâts et la mana
 
-    def cast_spell(self, other: 'Character'):
+    def cast_spell(self, other:Self):
         while True:
             self.list_spells()
-            print(f"\033[96m{self.name}\033[0m's current mana: \033[93m{self.mana}\033[0m")  # Cyan pour le nom du personnage, jaune pour la mana
-            choice = input("Choose a spell by entering its number (or type '\033[1mback\033[0m' to go back): ")  # Retour en gras
+            print(f"{Fore.CYAN}{self.name}{Style.RESET_ALL}'s current mana: {Fore.YELLOW}{self.mana}{Style.RESET_ALL}")  # Cyan pour le nom du personnage, jaune pour la mana
+            choice = input("Choose a spell by entering its number (or type 'back' to go back): ")  # Retour en gras
 
             if choice.lower() == 'back':
                 return  # Retournez à la boucle principale pour choisir entre arme et sort
@@ -30,17 +31,17 @@ class Wizard(Character):
                 if 0 <= spell_index < len(self.spells):
                     selected_spell = self.spells[spell_index]
                     if self.mana >= selected_spell.mana:
-                        print(f"\033[96m{self.name}\033[0m casts \033[96m{selected_spell.name}\033[0m at \033[91m{other.name}\033[0m")  # Cyan pour le nom du personnage et du sort, rouge pour le nom de l'autre personnage
+                        print(f"{Fore.CYAN}{self.name}{Style.RESET_ALL} casts {Fore.CYAN}{selected_spell.name}{Style.RESET_ALL} at {Fore.RED}{other.name}{Style.RESET_ALL}")  # Cyan pour le nom du personnage et du sort, rouge pour le nom de l'autre personnage
                         self.mana -= selected_spell.mana
                         other.set_hp(other.get_hp() - selected_spell.damage)
-                        print(f"\033[96m{self.name}\033[0m's remaining mana: \033[93m{self.mana}\033[0m")  # Cyan pour le nom du personnage, jaune pour la mana
+                        print(f"{Fore.CYAN}{self.name}{Style.RESET_ALL}'s remaining mana: {Fore.YELLOW}{self.mana}{Style.RESET_ALL}\n")  # Cyan pour le nom du personnage, jaune pour la mana
                         return  # Sortez de la boucle si le sort est lancé avec succès
                     else:
-                        print("\033[91mNot enough mana to cast the spell! Choose another spell.\033[0m")  # Rouge pour le message d'erreur
+                        print(f"{Fore.RED}Not enough mana to cast the spell! Choose another spell.{Style.RESET_ALL}")  # Rouge pour le message d'erreur
                 else:
-                    print("\033[91mInvalid spell choice.\033[0m")  # Rouge pour le message d'erreur
+                    print(f"{Fore.RED}Invalid spell choice.{Style.RESET_ALL}")  # Rouge pour le message d'erreur
             except ValueError:
-                print("\033[91mInvalid input. Please enter a valid number.\033[0m")  # Rouge pour le message d'erreur
+                print(f"{Fore.RED}Invalid input. Please enter a valid number.{Style.RESET_ALL}")  # Rouge pour le message d'erreur
 
     def attack(self, other:Self):
         valid_choice = False

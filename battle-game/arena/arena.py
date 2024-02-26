@@ -1,6 +1,8 @@
 
 from email.mime import image
 import shutil
+
+from colorama import Fore, Style
 from characters.character import Character
 
 
@@ -51,9 +53,18 @@ class Arena:
 
 
     def print_mini_bilan(self):
-        print(f"\033[1m\033[94m--- Round Summary {self.round_number} ---\033[0m")  # Titre en gras et en bleu
-        print(f"\033[94m{self.first_character.name}\033[0m HP: \033[94m{self.first_character.get_hp()}\033[0m | SHIELD: \033[94m{self.first_character.get_armor()}\033[0m ")
-        print(f"\033[95m{self.second_character.name}\033[0m HP: \033[95m{self.second_character.get_hp()}\033[0m | SHIELD: \033[95m{self.second_character.get_armor()}\033[0m")
+
+        # Titre en gras et en bleu
+        title = f"--- Round Summary {self.round_number} ---"
+        formatted_title = f"{Style.BRIGHT}{Fore.BLUE}{title}{Style.RESET_ALL}"
+        self.print_centered(formatted_title)
+
+        # Informations sur le premier personnage (bleu)
+        print(f"{Fore.BLUE}{self.first_character.name}{Style.RESET_ALL} HP: {Fore.BLUE}{self.first_character.get_hp()}{Style.RESET_ALL} | SHIELD: {Fore.BLUE}{self.first_character.get_armor()}{Style.RESET_ALL}")
+
+
+        # Informations sur le deuxième personnage (magenta)
+        print(f"{Fore.MAGENTA}{self.second_character.name}{Style.RESET_ALL} HP: {Fore.MAGENTA}{self.second_character.get_hp()}{Style.RESET_ALL} | SHIELD: {Fore.MAGENTA}{self.second_character.get_armor()}{Style.RESET_ALL}")
 
 
     def print_final_bilan(self):
